@@ -20,3 +20,9 @@ services:
 
    # Фабрика для создания объектов ОГРНИП / ОГРНЮЛ.
    Maris\Symfony\DocumentUnit\Factory\OgrnFactory: ~
+
+
+
+   Maris\Symfony\DocumentUnit\Form\BikType:
+      arguments:
+         $factory: '@Maris\Symfony\DocumentUnit\Factory\BikFactory'
