@@ -2,12 +2,12 @@
 
 namespace Maris\Symfony\DocumentUnit\Form;
 
-use Doctrine\DBAL\Types\TextType;
 use Maris\Symfony\DocumentUnit\Entity\Bik;
 use Maris\Symfony\DocumentUnit\Factory\BikFactory;
 use ReflectionException;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;

@@ -2,7 +2,7 @@
   "name": "maris/symfony-document-unit-bundle",
   "description": "Пакет добавляет возможность сохранения и проверки номеров документов.",
   "license": "MIT",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "type": "symfony-bundle",
   "authors": [
     {
