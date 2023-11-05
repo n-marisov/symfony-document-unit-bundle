@@ -48,7 +48,7 @@ class BikType extends AbstractType implements DataTransformerInterface
     public function configureOptions(OptionsResolver $resolver):void
     {
         $resolver->setDefaults([
-            "invalid_message" => "БИК не может быть создан.",
+            "invalid_message" => "БИК может состоять только из цифр и должен иметь длину 9 символов.",
             "trim" => true
         ]);
     }
@@ -70,8 +70,12 @@ class BikType extends AbstractType implements DataTransformerInterface
     public function reverseTransform( mixed $value ):?Bik
     {
 
-        if(is_string($value) && strlen($value) !== 9)
-            throw new TransformationFailedException("Не соответствует длинна.");
+        /*if(is_string($value) && strlen($value) !== 9)
+            throw new TransformationFailedException("Не соответствует длинна.");*/
+
+        //dump($value);
+        if(preg_match("~\D~",$value))
+            throw new TransformationFailedException("Есть не числовые значения.");
 
         return is_string($value) ? $this->factory->create($value) : null;
     }
