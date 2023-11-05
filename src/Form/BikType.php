@@ -64,10 +64,10 @@ class BikType extends AbstractType implements DataTransformerInterface
      * Тип поля.
      * @return string
      */
-    public function getBlockPrefix():string
+ /*   public function getBlockPrefix():string
     {
         return "text";
-    }
+    }*/
 
     /**
      * @param Bik|null $value
