@@ -23,14 +23,19 @@ class BikType extends AbstractType implements DataTransformerInterface
     /**
      * @param BikFactory $factory
      */
-    public function __construct(BikFactory $factory)
+   /* public function __construct(BikFactory $factory)
     {
         $this->factory = $factory;
-    }
+    }*/
 
-
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     * @return void
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options):void
     {
+        $this->factory = $options["bik_factory"];
         $builder->addViewTransformer( $this );
     }
 
@@ -46,7 +51,8 @@ class BikType extends AbstractType implements DataTransformerInterface
                     message: 'БИК может состоять только из цифр передана стока "{{value}}".'
                 )
             ],
-            "trim" => true
+            "trim" => true,
+            "bikFactory" => BikFactory::class
         ]);
     }
 
