@@ -7,6 +7,7 @@ use Maris\Symfony\DocumentUnit\Factory\BikFactory;
 use ReflectionException;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
+use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -47,27 +48,10 @@ class BikType extends AbstractType implements DataTransformerInterface
     public function configureOptions(OptionsResolver $resolver):void
     {
         $resolver->setDefaults([
-            "constraints" =>[
-                new Length(min: 9,max: 9,
-                    exactMessage: 'Длинна БИК должна составлять {{limit}} символов, передана "{{value}}" ({{value_length }} символов).'
-                ),
-                new Regex(
-                    pattern: "/\d*/",
-                    message: 'БИК может состоять только из цифр передана стока "{{value}}".'
-                )
-            ],
+            "invalid_message" => "БИК не может быть создан.",
             "trim" => true
         ]);
     }
-
-    /**
-     * Тип поля.
-     * @return string
-     */
- /*   public function getBlockPrefix():string
-    {
-        return "text";
-    }*/
 
     /**
      * @param Bik|null $value
@@ -75,16 +59,20 @@ class BikType extends AbstractType implements DataTransformerInterface
      */
     public function transform( mixed $value ):string
     {
-        return is_null($value) ? "" : $value;
+        return is_null($value) ? "" : (string) $value;
     }
 
     /**
-     * @param mixed $value
+     * @param string|null $value
      * @return Bik|null
      * @throws ReflectionException
      */
     public function reverseTransform( mixed $value ):?Bik
     {
+
+        if(is_string($value) && strlen($value) !== 9)
+            throw new TransformationFailedException("Не соответствует длинна.");
+
         return is_string($value) ? $this->factory->create($value) : null;
     }
 }
