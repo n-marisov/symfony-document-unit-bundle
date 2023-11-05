@@ -2,6 +2,7 @@
 
 namespace Maris\Symfony\DocumentUnit\Form;
 
+use Doctrine\DBAL\Types\TextType;
 use Maris\Symfony\DocumentUnit\Entity\Bik;
 use Maris\Symfony\DocumentUnit\Factory\BikFactory;
 use ReflectionException;
@@ -36,6 +37,11 @@ class BikType extends AbstractType implements DataTransformerInterface
     public function buildForm(FormBuilderInterface $builder, array $options):void
     {
         $builder->addViewTransformer( $this );
+    }
+
+    public function getParent():string
+    {
+        return TextType::class;
     }
 
     public function configureOptions(OptionsResolver $resolver):void
