@@ -21,8 +21,109 @@ services:
    # Фабрика для создания объектов ОГРНИП / ОГРНЮЛ.
    Maris\Symfony\DocumentUnit\Factory\OgrnFactory: ~
 
+   # Фабрика для создания объектов СНИЛС.
+   Maris\Symfony\DocumentUnit\Factory\SnilsFactory: ~
+
+   # Фабрика для создания объектов "код подразделения паспорта".
+   Maris\Symfony\DocumentUnit\Factory\Passport\DivisionCodeFactory: ~
+
+   # Фабрика для создания объектов "серия и номер паспорта".
+   Maris\Symfony\DocumentUnit\Factory\Passport\SeriesNumberFactory: ~
+
+   # Фабрика для создания объектов "Номер расчетного счета в банке".
+   Maris\Symfony\DocumentUnit\Factory\Account\PaymentFactory: ~
+
+   # Фабрика для создания объектов "Номер корреспондентского счета в банке".
+   Maris\Symfony\DocumentUnit\Factory\Account\CorrespondentFactory: ~
 
 
+   ##################################################################################################
+   ########################################## Формы #####################№№##########################
+   ##################################################################################################
+
+   # Тип формы для ввода БИК.
    Maris\Symfony\DocumentUnit\Form\BikType:
       arguments:
          $factory: '@Maris\Symfony\DocumentUnit\Factory\BikFactory'
+         $translator: '@translator'
+
+   # Тип формы для ввода ИНН.
+   Maris\Symfony\DocumentUnit\Form\InnType:
+      arguments:
+         $factory: '@Maris\Symfony\DocumentUnit\Factory\InnFactory'
+         $translator: '@translator'
+
+   # Тип формы для ввода КПП.
+   Maris\Symfony\DocumentUnit\Form\KppType:
+      arguments:
+         $factory: '@Maris\Symfony\DocumentUnit\Factory\KppFactory',
+         $translator: '@translator'
+
+   # Тип формы для ввода ОГРН.
+   Maris\Symfony\DocumentUnit\Form\OgrnType:
+      arguments:
+         $factory: '@Maris\Symfony\DocumentUnit\Factory\OgrnFactory'
+         $translator: '@translator'
+
+   # Тип формы для ввода СНИЛС.
+   Maris\Symfony\DocumentUnit\Form\SnilsType:
+      arguments:
+         $factory: '@Maris\Symfony\DocumentUnit\Factory\SnilsFactory'
+         $translator: '@translator'
+
+   # Тип формы для ввода "Код подразделения паспорта".
+   Maris\Symfony\DocumentUnit\Form\Passport\DivisionCodeType:
+      arguments:
+         $factory: '@Maris\Symfony\DocumentUnit\Factory\Passport\DivisionCodeFactory'
+         $translator: '@translator'
+
+   # Тип формы для ввода "Серия и номер паспорта".
+   Maris\Symfony\DocumentUnit\Form\Passport\SeriesNumberType:
+      arguments:
+         $factory: '@Maris\Symfony\DocumentUnit\Factory\Passport\SeriesNumberFactory'
+         $translator: '@translator'
+
+
+   ##################################################################################################
+   ########################################## Форматирование ########################################
+   ##################################################################################################
+
+   # Форматирует объект СНИЛС как в документе.
+   Maris\Symfony\DocumentUnit\Formatter\SnilsFormatter: ~
+
+   # Форматирует объект код подразделения паспорта как в документе.
+   Maris\Symfony\DocumentUnit\Formatter\Passport\DivisionCodeFormatter: ~
+
+   # Форматирует объект серию и номер паспорта как в документе.
+   Maris\Symfony\DocumentUnit\Formatter\Passport\SeriesNumberFormatter: ~
+
+   # Форматирует любой объект AbstractLegalNumber::class как в документе.
+   Maris\Symfony\DocumentUnit\Formatter\GeneralFormatter:
+      arguments:
+         $snilsFormatter: '@Maris\Symfony\DocumentUnit\Formatter\SnilsFormatter'
+         $divisionCodeFormatter: '@Maris\Symfony\DocumentUnit\Formatter\Passport\DivisionCodeFormatter'
+         $seriesNumberFormatter: '@Maris\Symfony\DocumentUnit\Formatter\Passport\SeriesNumberFormatter'
+
+
+   ##################################################################################################
+   ############################################# Twig ###############################################
+   ##################################################################################################
+
+   # Регистрирует функции и фильтры Twig пакета.
+   Maris\Symfony\DocumentUnit\Twig\Extension:
+      tags:
+         - 'twig.extension'
+
+
+   ##################################################################################################
+   ######################################№ Информаторы ##############################################
+   ##################################################################################################
+
+   # Возвращает информацию об ОГРН.
+   Maris\Symfony\DocumentUnit\Informer\OgrnInformer: ~
+
+   # Возвращает информацию об коде подразделения выдавшего паспорт.
+   Maris\Symfony\DocumentUnit\Informer\Passport\DivisionCodeInformer: ~
+
+   # Возвращает информацию об серии и номере паспорта.
+   Maris\Symfony\DocumentUnit\Informer\Passport\SeriesNumberInformer: ~

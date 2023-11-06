@@ -1,9 +1,9 @@
 <?php
 
-namespace Maris\Symfony\DocumentUnit\Form;
+namespace Maris\Symfony\DocumentUnit\Form\Passport;
 
 use Maris\Symfony\DocumentUnit\Entity\Bik;
-use Maris\Symfony\DocumentUnit\Factory\BikFactory;
+use Maris\Symfony\DocumentUnit\Factory\Passport\SeriesNumberFactory;
 use ReflectionException;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
@@ -14,19 +14,19 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * Поле для ввода БИК.
+ * Поле для ввода серии и номера паспорта одной строкой.
  */
-class BikType extends AbstractType implements DataTransformerInterface
+class SeriesNumberType extends AbstractType implements DataTransformerInterface
 {
 
-    protected BikFactory $factory;
+    protected SeriesNumberFactory $factory;
     protected TranslatorInterface $translator;
 
     /**
-     * @param BikFactory $factory
+     * @param SeriesNumberFactory $factory
      * @param TranslatorInterface $translator
      */
-    public function __construct(BikFactory $factory, TranslatorInterface $translator )
+    public function __construct(SeriesNumberFactory $factory, TranslatorInterface $translator )
     {
         $this->factory = $factory;
         $this->translator = $translator;
@@ -50,8 +50,8 @@ class BikType extends AbstractType implements DataTransformerInterface
     public function configureOptions(OptionsResolver $resolver):void
     {
         $resolver->setDefaults([
-            "invalid_message" => $this->translator->trans("document.unit.form.bik.invalid_message"),
-            "trim" => true
+            "invalid_message" => $this->translator->trans("document.unit.form.passport.series_number.invalid_message"),
+            "trim" => true,
         ]);
     }
 

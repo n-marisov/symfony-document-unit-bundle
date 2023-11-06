@@ -3,7 +3,7 @@
 namespace Maris\Symfony\DocumentUnit\Form;
 
 use Maris\Symfony\DocumentUnit\Entity\Bik;
-use Maris\Symfony\DocumentUnit\Factory\BikFactory;
+use Maris\Symfony\DocumentUnit\Factory\OgrnFactory;
 use ReflectionException;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
@@ -14,19 +14,19 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * Поле для ввода БИК.
+ * Поле для ввода ОГРН.
  */
-class BikType extends AbstractType implements DataTransformerInterface
+class OgrnType extends AbstractType implements DataTransformerInterface
 {
 
-    protected BikFactory $factory;
+    protected OgrnFactory $factory;
     protected TranslatorInterface $translator;
 
     /**
-     * @param BikFactory $factory
+     * @param OgrnFactory $factory
      * @param TranslatorInterface $translator
      */
-    public function __construct(BikFactory $factory, TranslatorInterface $translator )
+    public function __construct(OgrnFactory $factory, TranslatorInterface $translator )
     {
         $this->factory = $factory;
         $this->translator = $translator;

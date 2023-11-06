@@ -4,6 +4,7 @@ namespace Maris\Symfony\DocumentUnit\Form;
 
 use Maris\Symfony\DocumentUnit\Entity\Bik;
 use Maris\Symfony\DocumentUnit\Factory\BikFactory;
+use Maris\Symfony\DocumentUnit\Factory\SnilsFactory;
 use ReflectionException;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
@@ -11,22 +12,24 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
- * Поле для ввода БИК.
+ * Поле для ввода СНИЛС.
  */
-class BikType extends AbstractType implements DataTransformerInterface
+class SnilsType extends AbstractType implements DataTransformerInterface
 {
 
-    protected BikFactory $factory;
+    protected SnilsFactory $factory;
     protected TranslatorInterface $translator;
 
     /**
-     * @param BikFactory $factory
+     * @param SnilsFactory $factory
      * @param TranslatorInterface $translator
      */
-    public function __construct(BikFactory $factory, TranslatorInterface $translator )
+    public function __construct(SnilsFactory $factory, TranslatorInterface $translator )
     {
         $this->factory = $factory;
         $this->translator = $translator;
@@ -50,7 +53,7 @@ class BikType extends AbstractType implements DataTransformerInterface
     public function configureOptions(OptionsResolver $resolver):void
     {
         $resolver->setDefaults([
-            "invalid_message" => $this->translator->trans("document.unit.form.bik.invalid_message"),
+            "invalid_message" => $this->translator->trans("document.unit.form.snils.invalid_message"),
             "trim" => true
         ]);
     }

@@ -1,0 +1,18 @@
+document:
+  unit:
+    form:
+      bik:
+        invalid_message: 'БИК может состоять только из цифр и должен иметь длину 9 символов.'
+      inn:
+        invalid_message: 'ИНН может состоять только из цифр и должен иметь длину 10 или 12 символов.'
+      kpp:
+        invalid_message: 'Не валидный КПП.'
+      ogrn:
+        invalid_message: 'Не валидный ОГРН.'
+      snils:
+        invalid_message: 'Не валидный СНИЛС.'
+      passport:
+        division_code:
+          invalid_message: 'Не валидный код подразделения.'
+        series_number:
+          invalid_message: 'Не валидны серия и номер паспорта'
